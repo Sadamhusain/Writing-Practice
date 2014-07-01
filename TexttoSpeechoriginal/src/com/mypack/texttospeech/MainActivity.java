@@ -1,29 +1,17 @@
 package com.mypack.texttospeech;
  
 import java.util.Locale;
-
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
  
 public class MainActivity extends Activity implements
@@ -54,8 +42,9 @@ public class MainActivity extends Activity implements
  
             @Override
             public void onClick(View arg0) {
-  			 //String text=txtText.getText().toString();
+  			
              speakOut();
+            
          	       
          	}
  
@@ -104,35 +93,17 @@ public class MainActivity extends Activity implements
     	{
     		dbhelper.open();
         	dbhelper.update(text);
-//    		Cursor chData=dbhelper.getname(text);
-//    		if(chData.moveToFirst())
-//    		{
-//    			do
-//    			{
-//    				name = chData.getString(0);
-//    				
-//    				System.out.println("name===="+name);
-//    			
-//    				
-//    				
-//    			}while(chData.moveToNext());
-//    		}
-//    		if(name!=null)
-//    		{
-//    			dbhelper.update(text);
-//    		}else
-//    		{
-//    			dbhelper.insertName(text);
-//    		}
         	Toast.makeText(getApplicationContext(),"Saved into database",Toast.LENGTH_LONG).show(); 
         	tts.speak("Congratulation"+text+"Your going to next level", TextToSpeech.QUEUE_FLUSH, null);
+        	Intent intent = new Intent(MainActivity.this,SecondActivity.class);
+        	intent.putExtra("message",txtText.getText().toString());
+            startActivity(intent);
     	}
     	else{
-    		AlertDialog alertDialog = new AlertDialog.Builder(
-                    MainActivity.this).create();
+    		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
     		final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 			alertDialog.setTitle("Invalid Data..");
-			alertDialog.setMessage("Please, Enter Missing or valid data..");
+			alertDialog.setMessage("Please enter missing data!!!");
     		
 			tts.speak("Please enter missing data", TextToSpeech.QUEUE_FLUSH, null);
     		    alert.setPositiveButton("Ok", new DialogInterface.OnClickListener(){

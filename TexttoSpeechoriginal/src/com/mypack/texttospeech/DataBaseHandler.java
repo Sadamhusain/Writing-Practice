@@ -12,7 +12,7 @@ import android.util.Log;
 
 public class DataBaseHandler {
 
-	public static final String DataBase_Name="Writing_practises11";
+	public static final String DataBase_Name="Writing_practises1111";
 	public static final int DATABASE_VERSION=1;
 	public static final String Writing_practise="Writingpractise";
 	
@@ -77,37 +77,13 @@ public class DataBaseHandler {
 		return this;
 	}
 	
-//	public long insertName(String name)
-//	{
-//		long id = 0;
-//		try{
-//			open();
-//			ContentValues content=new ContentValues();
-//			content.put(Username, name);
-//
-//			id = db.insertOrThrow(Writing_practise, null, content);
-//		}catch(Exception ex){
-//			Log.d("EXCEPTION", ex.getMessage());
-//		}		
-//		return id;
-//	}
 
-	public Cursor getname(String gname) {
+	public Cursor getname() {
 		// TODO Auto-generated method stub
 		return db.rawQuery("select * from Writingpractise", null);
 		
 	}
 
-//	public void update(String text) {
-//		try{
-//		this.open();
-//		String selectQuery ="UPDATE Writing_practise SET name='"+text+"'";
-//		Cursor cursor =db.rawQuery(selectQuery, null);
-//		System.out.println("updated1:"+cursor.getCount());
-//		}catch(Exception ex){
-//			Log.i("DatabaseError", ex.getMessage());
-//		}	
-//	}
 	public void update(String name1) {
 		// TODO Auto-generated method stub
 		ContentValues values = new ContentValues();
